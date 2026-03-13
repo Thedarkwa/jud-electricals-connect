@@ -1,10 +1,55 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Phone, Mail, MapPin, Send, Zap, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+
+const contactInfo = [
+  {
+    icon: MapPin,
+    title: "Visit Us",
+    lines: ["P.O. Box 5, Kokompe", "Tema, Ghana"],
+  },
+  {
+    icon: Phone,
+    title: "Call Us",
+    lines: ["+233 547 656 141", "+233 544 116 172"],
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    lines: ["ceo.judelectricals@gmail.com"],
+  },
+  {
+    icon: Clock,
+    title: "Working Hours",
+    lines: ["Mon – Fri: 8AM – 6PM", "Sat: 9AM – 2PM"],
+  },
+];
+
+const highlights = [
+  { icon: Zap, text: "Free Consultation" },
+  { icon: Shield, text: "Licensed & Insured" },
+  { icon: Clock, text: "Fast Response" },
+];
+
+function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 const Contact = () => {
   const { toast } = useToast();
@@ -16,131 +61,138 @@ const Contact = () => {
     setTimeout(() => {
       setLoading(false);
       toast({
-        title: "Message Sent!",
-        description: "We'll get back to you as soon as possible.",
+        title: "Message Sent Successfully!",
+        description: "We'll get back to you within 24 hours.",
       });
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+    }, 1200);
   };
 
   return (
-    <div className="pt-20">
-      <section className="bg-secondary py-20">
-        <div className="container mx-auto px-4 text-center">
+    <div className="overflow-x-hidden">
+      {/* Hero */}
+      <section className="relative bg-navy py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-dark-radial" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        <div className="container mx-auto px-4 lg:px-8 text-center relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
+          >
+            <div className="w-2 h-2 rounded-full bg-electric animate-pulse" />
+            <span className="text-sm font-medium text-electric">Get in Touch</span>
+          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-heading text-4xl sm:text-5xl font-bold text-primary-foreground mb-4"
+            transition={{ delay: 0.15 }}
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-secondary-foreground mb-6"
           >
             Contact <span className="text-gradient-electric">Us</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-secondary-foreground/80 text-lg max-w-2xl mx-auto"
+            transition={{ delay: 0.3 }}
+            className="text-secondary-foreground/60 text-lg max-w-2xl mx-auto"
           >
-            Get in touch for a free consultation and quote.
+            Ready to start your project? Reach out for a free consultation and quote.
           </motion.p>
+
+          {/* Highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="flex flex-wrap justify-center gap-6 mt-10"
+          >
+            {highlights.map((h) => (
+              <div key={h.text} className="flex items-center gap-2 glass rounded-full px-5 py-2.5">
+                <h.icon className="w-4 h-4 text-gold" />
+                <span className="text-sm font-medium text-secondary-foreground/80">{h.text}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      {/* Contact Content */}
+      <section className="py-24 lg:py-32 bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-2 space-y-8"
-            >
-              <div>
-                <h2 className="font-heading text-2xl font-bold text-foreground mb-6">Get In Touch</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  We'd love to hear from you. Reach out for any electrical service inquiries, quotes, or consultations.
-                </p>
-              </div>
+            {/* Info Cards */}
+            <div className="lg:col-span-2 space-y-5">
+              {contactInfo.map((info, i) => (
+                <AnimatedSection key={info.title} delay={i * 0.1}>
+                  <div className="bg-card rounded-2xl p-6 card-premium group">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-electric/10 group-hover:bg-gradient-electric flex items-center justify-center transition-all duration-500 shrink-0">
+                        <info.icon className="w-6 h-6 text-electric group-hover:text-primary-foreground transition-colors duration-500" />
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-card-foreground text-sm mb-1">{info.title}</h4>
+                        {info.lines.map((line) => (
+                          <p key={line} className="text-muted-foreground text-sm">{line}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
 
-              <div className="space-y-5">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-semibold text-foreground text-sm">Address</h4>
-                    <p className="text-muted-foreground text-sm">P.O. Box 5, Kokompe – Tema, Ghana</p>
-                  </div>
+            {/* Form */}
+            <AnimatedSection delay={0.2} className="lg:col-span-3">
+              <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-8 lg:p-10 card-premium space-y-6">
+                <div>
+                  <h2 className="font-heading text-2xl font-extrabold text-card-foreground mb-1">Send us a message</h2>
+                  <p className="text-muted-foreground text-sm">Fill out the form and we'll get back to you shortly.</p>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-semibold text-foreground text-sm">Phone</h4>
-                    <p className="text-muted-foreground text-sm">+233 547 656 141</p>
-                    <p className="text-muted-foreground text-sm">+233 544 116 172</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-semibold text-foreground text-sm">Email</h4>
-                    <p className="text-muted-foreground text-sm">ceo.judelectricals@gmail.com</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-3"
-            >
-              <form onSubmit={handleSubmit} className="bg-card rounded-xl p-8 card-elevated space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-sm font-medium text-card-foreground mb-1.5 block">Full Name</label>
-                    <Input placeholder="John Doe" required className="bg-background" />
+                    <label className="text-sm font-semibold text-card-foreground mb-2 block">Full Name</label>
+                    <Input placeholder="John Doe" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-card-foreground mb-1.5 block">Phone Number</label>
-                    <Input placeholder="+233 XXX XXX XXX" required className="bg-background" />
+                    <label className="text-sm font-semibold text-card-foreground mb-2 block">Phone Number</label>
+                    <Input placeholder="+233 XXX XXX XXX" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">Email</label>
-                  <Input type="email" placeholder="you@example.com" required className="bg-background" />
+                  <label className="text-sm font-semibold text-card-foreground mb-2 block">Email Address</label>
+                  <Input type="email" placeholder="you@example.com" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">Service Needed</label>
-                  <Input placeholder="e.g., Electrical Installation" className="bg-background" />
+                  <label className="text-sm font-semibold text-card-foreground mb-2 block">Service Needed</label>
+                  <Input placeholder="e.g., Electrical Installation, Energy Audit" className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-card-foreground mb-1.5 block">Message</label>
-                  <Textarea placeholder="Tell us about your project..." rows={4} required className="bg-background" />
+                  <label className="text-sm font-semibold text-card-foreground mb-2 block">Your Message</label>
+                  <Textarea placeholder="Tell us about your project requirements..." rows={5} required className="bg-muted border-0 rounded-xl focus:ring-2 focus:ring-electric resize-none" />
                 </div>
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-electric"
-                  size="lg"
+                  variant="hero"
+                  size="xl"
+                  className="w-full"
                 >
-                  {loading ? "Sending..." : (
+                  {loading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                      Sending...
+                    </div>
+                  ) : (
                     <>
-                      <Send className="w-4 h-4 mr-2" />
+                      <Send className="w-5 h-5" />
                       Send Message
                     </>
                   )}
                 </Button>
               </form>
-            </motion.div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -14,37 +15,68 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Jud Electricals" className="h-10 w-10 rounded" />
-            <span className="font-heading text-lg font-bold text-primary-foreground hidden sm:block">
-              Jud Electricals
-            </span>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-navy/95 backdrop-blur-xl shadow-lg shadow-navy/20 border-b border-electric/10"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <img src={logo} alt="Jud Electricals" className="h-11 w-11 rounded-lg transition-transform group-hover:scale-110" />
+              <div className="absolute inset-0 rounded-lg bg-electric/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <div className="hidden sm:block">
+              <span className="font-heading text-lg font-bold text-secondary-foreground tracking-tight">
+                Jud Electricals
+              </span>
+              <span className="block text-[10px] uppercase tracking-[0.2em] text-electric font-medium -mt-0.5">
+                Limited Company
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.path
-                    ? "text-accent bg-primary/20"
-                    : "text-secondary-foreground/80 hover:text-accent hover:bg-primary/10"
+                    ? "text-electric"
+                    : "text-secondary-foreground/70 hover:text-secondary-foreground"
                 }`}
               >
                 {link.label}
+                {location.pathname === link.path && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-electric rounded-full"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
               </Link>
             ))}
-            <Link to="/contact">
-              <Button className="ml-4 bg-primary text-primary-foreground hover:bg-primary/90 glow-electric">
-                <Zap className="w-4 h-4 mr-1" />
+            <Link to="/contact" className="ml-4">
+              <Button variant="electric" size="default">
+                <Zap className="w-4 h-4" />
                 Get a Quote
               </Button>
             </Link>
@@ -53,39 +85,57 @@ const Navbar = () => {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-secondary-foreground"
+            className="lg:hidden text-secondary-foreground p-2 rounded-lg hover:bg-secondary/50 transition-colors"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
         {/* Mobile Nav */}
-        {isOpen && (
-          <div className="md:hidden pb-4 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? "text-accent bg-primary/20"
-                    : "text-secondary-foreground/80 hover:text-accent"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link to="/contact" onClick={() => setIsOpen(false)}>
-              <Button className="w-full mt-2 bg-primary text-primary-foreground">
-                <Zap className="w-4 h-4 mr-1" />
-                Get a Quote
-              </Button>
-            </Link>
-          </div>
-        )}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden overflow-hidden"
+            >
+              <div className="pb-6 pt-2 space-y-1 glass-dark rounded-2xl p-4 mb-4">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                        location.pathname === link.path
+                          ? "text-electric bg-electric/10"
+                          : "text-secondary-foreground/70 hover:text-secondary-foreground hover:bg-secondary/30"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <div className="pt-3">
+                  <Link to="/contact" onClick={() => setIsOpen(false)}>
+                    <Button variant="electric" className="w-full" size="lg">
+                      <Zap className="w-4 h-4" />
+                      Get a Quote
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
