@@ -295,6 +295,57 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ===== GALLERY PREVIEW ===== */}
+      <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-gold/[0.04] rounded-full blur-[120px]" />
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <AnimatedSection className="text-center mb-16">
+            <span className="text-gold font-semibold text-sm uppercase tracking-wider">Our Work</span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground mt-3 mb-4 line-decoration line-decoration-center">
+              Featured Projects
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto text-lg mt-6">
+              See the quality and precision we bring to every installation.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { src: galleryFieldWork, title: "Cable Termination", tag: "Industrial" },
+              { src: galleryTransformer, title: "Transformer Install", tag: "Industrial" },
+              { src: galleryPanels, title: "Distribution Panels", tag: "Panels" },
+              { src: galleryCctv, title: "CCTV Setup", tag: "Security" },
+            ].map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.1}>
+                <Link to="/gallery" className="group block rounded-2xl overflow-hidden card-premium aspect-[3/4] relative">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="text-[10px] font-bold text-electric uppercase tracking-widest">{item.tag}</span>
+                    <h3 className="font-heading text-sm font-bold text-secondary-foreground mt-0.5">{item.title}</h3>
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection delay={0.4} className="text-center mt-12">
+            <Link to="/gallery">
+              <Button variant="electric" size="lg">
+                <Camera className="w-4 h-4" />
+                View Full Gallery
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ===== CTA ===== */}
       <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
         <div className="absolute inset-0">
