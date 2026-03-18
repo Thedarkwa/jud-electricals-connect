@@ -57,15 +57,17 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Message Sent Successfully!",
-        description: "We'll get back to you within 24 hours.",
-      });
-      (e.target as HTMLFormElement).reset();
-    }, 1200);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const email = formData.get("email") as string;
+    const service = formData.get("service") as string;
+    const message = formData.get("message") as string;
+
+    const text = `Hello Jud Electricals!%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Email:* ${encodeURIComponent(email)}%0A*Service:* ${encodeURIComponent(service)}%0A*Message:* ${encodeURIComponent(message)}`;
+    
+    window.open(`https://wa.me/233245110490?text=${text}`, "_blank");
   };
 
   return (
@@ -153,24 +155,24 @@ const Contact = () => {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="text-sm font-semibold text-card-foreground mb-2 block">Full Name</label>
-                    <Input placeholder="John Doe" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
+                    <Input name="name" placeholder="John Doe" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                   </div>
                   <div>
                     <label className="text-sm font-semibold text-card-foreground mb-2 block">Phone Number</label>
-                    <Input placeholder="+233 XXX XXX XXX" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
+                    <Input name="phone" placeholder="+233 XXX XXX XXX" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                   </div>
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-card-foreground mb-2 block">Email Address</label>
-                  <Input type="email" placeholder="you@example.com" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
+                  <Input name="email" type="email" placeholder="you@example.com" required className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-card-foreground mb-2 block">Service Needed</label>
-                  <Input placeholder="e.g., Electrical Installation, Energy Audit" className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
+                  <Input name="service" placeholder="e.g., Electrical Installation, Energy Audit" className="bg-muted border-0 h-12 rounded-xl focus:ring-2 focus:ring-electric" />
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-card-foreground mb-2 block">Your Message</label>
-                  <Textarea placeholder="Tell us about your project requirements..." rows={5} required className="bg-muted border-0 rounded-xl focus:ring-2 focus:ring-electric resize-none" />
+                  <Textarea name="message" placeholder="Tell us about your project requirements..." rows={5} required className="bg-muted border-0 rounded-xl focus:ring-2 focus:ring-electric resize-none" />
                 </div>
                 <Button
                   type="submit"
