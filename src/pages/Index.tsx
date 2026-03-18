@@ -7,7 +7,7 @@ import {
   Phone, Building2, Home, Camera,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg2.jpg";
+import heroBg from "@/assets/hero-bg3.jpg";
 import galleryFieldWork from "@/assets/gallery/field-work.png";
 import galleryTransformer from "@/assets/gallery/transformer.jpg";
 import galleryPanels from "@/assets/gallery/meter-panels.png";
