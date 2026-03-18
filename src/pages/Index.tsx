@@ -4,10 +4,14 @@ import { motion, useInView } from "framer-motion";
 import {
   Zap, Shield, Users, CheckCircle, ArrowRight, ArrowUpRight,
   Lightbulb, Factory, Wrench, ClipboardCheck, HeartHandshake,
-  Phone, Building2, Home,
+  Phone, Building2, Home, Camera,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg2.jpg";
+import galleryFieldWork from "@/assets/gallery/field-work.png";
+import galleryTransformer from "@/assets/gallery/transformer.jpg";
+import galleryPanels from "@/assets/gallery/meter-panels.png";
+import galleryCctv from "@/assets/gallery/cctv-cameras.jpg";
 
 const services = [
   { icon: Shield, title: "Earthing & Lightning Protection", desc: "Professional grounding and surge protection systems for buildings and equipment." },
