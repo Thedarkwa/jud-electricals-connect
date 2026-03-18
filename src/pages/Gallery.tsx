@@ -10,16 +10,36 @@ import distributionBoard from "@/assets/gallery/distribution-board.jpg";
 import busbarCables from "@/assets/gallery/busbar-cables.jpg";
 import transformer from "@/assets/gallery/transformer.jpg";
 import cctvCameras from "@/assets/gallery/cctv-cameras.jpg";
+import generatorPanel from "@/assets/gallery/generator-panel.jpg";
+import powerPoles from "@/assets/gallery/power-poles.jpg";
+import circuitBreakers from "@/assets/gallery/circuit-breakers.jpg";
+import firePump from "@/assets/gallery/fire-pump.png";
+import cableTrayInstall from "@/assets/gallery/cable-tray-install.jpg";
+import cableTrays from "@/assets/gallery/cable-trays.png";
+import cableTrayRouting from "@/assets/gallery/cable-tray-routing.jpg";
+import contactors from "@/assets/gallery/contactors.jpg";
+import pumpSystem from "@/assets/gallery/pump-system.jpg";
+import panelWork from "@/assets/gallery/panel-work.png";
 
 const projects = [
-  { src: panelWiring, title: "Panel Wiring", category: "Panels", aspect: "portrait" },
-  { src: meterPanels, title: "Meter & Distribution Panels", category: "Panels", aspect: "landscape" },
-  { src: fieldWork, title: "On-Site Cable Termination", category: "Industrial", aspect: "landscape" },
-  { src: poleInstall, title: "Outdoor Pole Installation", category: "Industrial", aspect: "portrait" },
-  { src: distributionBoard, title: "Distribution Board Assembly", category: "Panels", aspect: "portrait" },
-  { src: busbarCables, title: "Busbar & Cable Connections", category: "Industrial", aspect: "portrait" },
-  { src: transformer, title: "Transformer Installation", category: "Industrial", aspect: "portrait" },
-  { src: cctvCameras, title: "CCTV Camera Setup", category: "Security", aspect: "portrait" },
+  { src: panelWiring, title: "Panel Wiring", category: "Panels" },
+  { src: meterPanels, title: "Meter & Distribution Panels", category: "Panels" },
+  { src: fieldWork, title: "On-Site Cable Termination", category: "Industrial" },
+  { src: poleInstall, title: "Outdoor Pole Installation", category: "Industrial" },
+  { src: distributionBoard, title: "Distribution Board Assembly", category: "Panels" },
+  { src: busbarCables, title: "Busbar & Cable Connections", category: "Industrial" },
+  { src: transformer, title: "Transformer Installation", category: "Industrial" },
+  { src: cctvCameras, title: "CCTV Camera Setup", category: "Security" },
+  { src: generatorPanel, title: "Generator Control Panel", category: "Panels" },
+  { src: powerPoles, title: "Power Line Installation", category: "Industrial" },
+  { src: circuitBreakers, title: "Circuit Breaker Board", category: "Panels" },
+  { src: firePump, title: "Fire Pump & Cable System", category: "Industrial" },
+  { src: cableTrayInstall, title: "Cable Tray Installation", category: "Industrial" },
+  { src: cableTrays, title: "Cable Tray Network", category: "Industrial" },
+  { src: cableTrayRouting, title: "Cable Tray Routing", category: "Industrial" },
+  { src: contactors, title: "Contactor Assembly", category: "Panels" },
+  { src: pumpSystem, title: "Pump Control System", category: "Industrial" },
+  { src: panelWork, title: "Distribution Panel Work", category: "Panels" },
 ];
 
 const categories = ["All", "Panels", "Industrial", "Security"];
