@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 217 91% 50%;
+    --primary: 42 92% 52%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 222 47% 8%;
@@ -32,30 +32,30 @@
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 217 91% 50%;
+    --ring: 42 92% 52%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --electric-blue: 217 91% 50%;
-    --electric-cyan: 195 100% 50%;
+    --electric-blue: 42 92% 52%;
+    --electric-cyan: 30 100% 55%;
     --navy: 222 47% 8%;
     --navy-light: 222 35% 14%;
     --gold: 38 92% 55%;
     --gold-light: 45 100% 70%;
 
-    --gradient-electric: linear-gradient(135deg, hsl(217 91% 50%), hsl(195 100% 50%));
+    --gradient-electric: linear-gradient(135deg, hsl(42 92% 52%), hsl(30 100% 55%));
     --gradient-gold: linear-gradient(135deg, hsl(38 92% 55%), hsl(45 100% 70%));
     --gradient-dark: linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 35% 14%) 100%);
-    --gradient-dark-radial: radial-gradient(ellipse at 30% 0%, hsl(217 91% 50% / 0.15) 0%, transparent 60%);
+    --gradient-dark-radial: radial-gradient(ellipse at 30% 0%, hsl(42 92% 52% / 0.15) 0%, transparent 60%);
     --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(0 0% 100% / 0.05));
 
     --shadow-sm: 0 2px 8px hsl(222 47% 11% / 0.06);
     --shadow-md: 0 4px 24px hsl(222 47% 11% / 0.08);
     --shadow-lg: 0 8px 40px hsl(222 47% 11% / 0.12);
-    --shadow-glow: 0 0 40px hsl(217 91% 50% / 0.25);
+    --shadow-glow: 0 0 40px hsl(42 92% 52% / 0.25);
     --shadow-glow-gold: 0 0 40px hsl(38 92% 55% / 0.25);
-    --shadow-card-hover: 0 20px 60px hsl(217 91% 50% / 0.15), 0 0 0 1px hsl(217 91% 50% / 0.1);
+    --shadow-card-hover: 0 20px 60px hsl(42 92% 52% / 0.15), 0 0 0 1px hsl(42 92% 52% / 0.1);
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -77,7 +77,7 @@
     --card-foreground: 210 40% 96%;
     --popover: 222 35% 10%;
     --popover-foreground: 210 40% 96%;
-    --primary: 217 91% 55%;
+    --primary: 42 92% 55%;
     --primary-foreground: 0 0% 100%;
     --secondary: 222 35% 14%;
     --secondary-foreground: 210 40% 96%;
@@ -89,7 +89,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 222 25% 18%;
     --input: 222 25% 18%;
-    --ring: 217 91% 55%;
+    --ring: 42 92% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -228,7 +228,7 @@
   }
 
   .shimmer-border {
-    background: linear-gradient(90deg, transparent, hsl(217 91% 50% / 0.5), transparent);
+    background: linear-gradient(90deg, transparent, hsl(42 92% 52% / 0.5), transparent);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
   }
