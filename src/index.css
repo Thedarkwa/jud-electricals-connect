@@ -228,7 +228,7 @@
   }
 
   .shimmer-border {
-    background: linear-gradient(90deg, transparent, hsl(217 91% 50% / 0.5), transparent);
+    background: linear-gradient(90deg, transparent, hsl(42 92% 52% / 0.5), transparent);
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
   }
