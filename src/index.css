@@ -37,17 +37,17 @@
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --electric-blue: 217 91% 50%;
-    --electric-cyan: 195 100% 50%;
+    --electric-blue: 42 92% 52%;
+    --electric-cyan: 30 100% 55%;
     --navy: 222 47% 8%;
     --navy-light: 222 35% 14%;
     --gold: 38 92% 55%;
     --gold-light: 45 100% 70%;
 
-    --gradient-electric: linear-gradient(135deg, hsl(217 91% 50%), hsl(195 100% 50%));
+    --gradient-electric: linear-gradient(135deg, hsl(42 92% 52%), hsl(30 100% 55%));
     --gradient-gold: linear-gradient(135deg, hsl(38 92% 55%), hsl(45 100% 70%));
     --gradient-dark: linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 35% 14%) 100%);
-    --gradient-dark-radial: radial-gradient(ellipse at 30% 0%, hsl(217 91% 50% / 0.15) 0%, transparent 60%);
+    --gradient-dark-radial: radial-gradient(ellipse at 30% 0%, hsl(42 92% 52% / 0.15) 0%, transparent 60%);
     --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(0 0% 100% / 0.05));
 
     --shadow-sm: 0 2px 8px hsl(222 47% 11% / 0.06);
